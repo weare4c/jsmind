@@ -1,5 +1,8 @@
 /*
  * Released under BSD License
+ * Copyright (c) 2021 pascal.zontrop@weare4c.com
+ *
+ * Released under BSD License
  * Copyright (c) 2014-2016 hizzgdev@163.com
  *
  * Project Home:
@@ -32,7 +35,6 @@
 
     // shortcut of methods in dom
     var $d = $w.document;
-    var $g = function (id) { return $d.getElementById(id); };
     var $c = function (tag) { return $d.createElement(tag); };
     var $t = function (n, t) { if (n.hasChildNodes()) { n.firstChild.nodeValue = t; } else { n.appendChild($d.createTextNode(t)); } };
 
@@ -2301,7 +2303,7 @@
         init: function () {
             logger.debug('view.init');
 
-            this.container = $i(this.opts.container) ? this.opts.container : $g(this.opts.container);
+            this.container = $i(this.opts.container) ? this.opts.container : undefined;
             if (!this.container) {
                 logger.error('the options.view.container was not be found in dom');
                 return;
@@ -2352,7 +2354,7 @@
                 return null;
             }
             if (tagName == 'jmnode' || tagName == 'jmexpander') {
-                return element.getAttribute('nodeid');
+                return element.dataset.nodeid;
             } else {
                 return this.get_binded_nodeid(element.parentElement);
             }
@@ -2441,7 +2443,7 @@
             } else {
                 var d_e = $c('jmexpander');
                 $t(d_e, '-');
-                d_e.setAttribute('nodeid', node.id);
+                d_e.dataset.nodeid = node.id;
                 d_e.style.visibility = 'hidden';
                 parent_node.appendChild(d_e);
                 view_data.expander = d_e;
@@ -2453,7 +2455,7 @@
                     $t(d, node.topic);
                 }
             }
-            d.setAttribute('nodeid', node.id);
+            d.dataset.nodeid = node.id;
             d.style.visibility = 'hidden';
             this._reset_node_custom_style(d, node.data);
 
