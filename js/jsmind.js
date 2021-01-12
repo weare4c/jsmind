@@ -2305,7 +2305,7 @@
 
             this.container = $i(this.opts.container) ? this.opts.container : undefined;
             if (!this.container) {
-                logger.error('the options.view.container was not be found in dom');
+                logger.error('Please pass an Element object as the container as document.getElementById does not work in Lightning Web Components');
                 return;
             }
             this.e_panel = $c('div');
