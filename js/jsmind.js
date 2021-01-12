@@ -1463,7 +1463,7 @@
             }
             this.mind.selected = node;
             this.view.select_node(node);
-            this.invoke_event_handle(jm.event_type.select, { evt: 'select_node', data: [], node: node.id });
+            this.invoke_event_handle(jm.event_type.select, { evt: 'select_node', data: node.data, node: node.id });
         },
 
         get_selected_node: function () {
